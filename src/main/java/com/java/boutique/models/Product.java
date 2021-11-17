@@ -1,12 +1,22 @@
 package com.java.boutique.models;
 
+import java.util.Date;
+
 public class Product {
     private int id;
     private String type;
     private int rating;
     private String name;
-    private String createdAt;
+    private Date createdAt;
+    private int categoryId;
 
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
 
     public int getId() {
         return id;
@@ -36,10 +46,10 @@ public class Product {
         this.name = name;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 

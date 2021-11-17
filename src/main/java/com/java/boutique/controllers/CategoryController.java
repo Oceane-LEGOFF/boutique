@@ -7,37 +7,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/category")
 public class CategoryController {
 
     @Autowired
     private CategoryDao categoryDao;
 
     //route get all
-    @GetMapping("/category")
+    @GetMapping("")
     public @ResponseBody List<Category> listAll(){
             return categoryDao.listAll();
     }
 
     //route get/id
-    @GetMapping("/category/get/{id}")
+    @GetMapping("/{id}")
     public @ResponseBody List<Category> findById(@PathVariable int id) {
         return categoryDao.findById(id);
     }
 
     //route add
-    @PostMapping("/category/add")
+    @PostMapping("")
     public int add(@RequestBody Category category){
         return categoryDao.add(category);
     }
 
     //route update
-    @PutMapping("/category/put/{id}")
+    @PutMapping("/{id}")
     public int update(@RequestBody Category category, @PathVariable int id){
         return categoryDao.updateById(category, id);
     }
 
     //route delete
-    @DeleteMapping("/category/delete/{id}")
+    @DeleteMapping("/{id}")
     public int deleteById(@PathVariable int id) {
         return categoryDao.deleteById(id);
     }

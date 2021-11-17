@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/product")
 public class ProductController {
 
     @Autowired
@@ -15,32 +16,32 @@ public class ProductController {
     private String errorMessage;
 
     //route get all
-    @GetMapping("/product")
+    @GetMapping("")
     public @ResponseBody
     List<Product> listAll(){
         return productDao.listAll();
     }
 
     //route get/id
-    @GetMapping("/product/get/{id}")
+    @GetMapping("/{id}")
     public @ResponseBody List<Product> findById(@PathVariable int id) {
         return productDao.findById(id);
     }
 
     //route add
-    @PostMapping("/product/add")
+    @PostMapping("")
     public int add(@RequestBody Product product){
         return productDao.add(product);
     }
 
     //route update
-    @PutMapping("/product/put/{id}")
+    @PutMapping("/{id}")
     public int update(@RequestBody Product product, @PathVariable int id){
         return productDao.updateById(product, id);
     }
 
     //route DELETE
-    @DeleteMapping("/product/delete/{id}")
+    @DeleteMapping("/{id}")
     public int deleteById(@PathVariable int id) {
         return productDao.deleteById(id);
     }

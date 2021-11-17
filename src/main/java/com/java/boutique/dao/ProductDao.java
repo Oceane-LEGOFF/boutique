@@ -30,7 +30,7 @@ public class ProductDao {
 
     //methode add
     public int add (Product product){
-        return jdbcTemplate.update("INSERT INTO product (type, rating, name) VALUES (?, ?, ?)",new Object[] {product.getType(), product.getRating(), product.getName()});
+        return jdbcTemplate.update("INSERT INTO product (type, rating, name, createdAt, categoryId) VALUES (?, ?, ?, ?, ?)",new Object[] {product.getType(), product.getRating(), product.getName(), product.getCreatedAt(), product.getCategoryId()});
     }
 
     //methode update
