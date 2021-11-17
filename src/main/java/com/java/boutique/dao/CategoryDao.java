@@ -16,9 +16,15 @@ public class CategoryDao {
 
     public List<Category> listAll(){
         String sql = "SELECT * FROM category";
-
         List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
-
         return list;
     }
+
+
+    public Category findById(int id) {
+        String sql = "SELECT * FROM category WHERE id=?";
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Category.class), id);
+    }
+
+
 }
