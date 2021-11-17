@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+<h1>Liste des Produits</h1>
+<table>
+    <thead>
+    <tr><td>id</td><td>type</td><td>rating</td><td>name</td><td>createdAt</td></tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${listProduct}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.type}"></td>
+        <td th:text="${product.rating}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.createdAt}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
