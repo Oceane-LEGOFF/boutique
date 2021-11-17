@@ -1,6 +1,5 @@
 package com.java.boutique.dao;
 
-import com.java.boutique.models.Category;
 import com.java.boutique.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -32,6 +31,11 @@ public class ProductDao {
     //methode add
     public int add (Product product){
         return jdbcTemplate.update("INSERT INTO product (type, rating, name) VALUES (?, ?, ?)",new Object[] {product.getType(), product.getRating(), product.getName()});
+    }
+
+    //methode update
+    public int updateById(Product product, int id){
+        return jdbcTemplate.update("UPDATE product SET type = ?, rating = ?, name = ? WHERE id = ?", new Object[] {product.getType(), product.getRating(), product.getName(), id});
     }
 
     //methode delete

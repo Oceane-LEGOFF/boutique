@@ -31,12 +31,16 @@ public class ProductController {
     @PostMapping("/product/add")
     public int add(@RequestBody Product product){
         return productDao.add(product);
+    }
 
+    //route update
+    @PutMapping("/product/put/{id}")
+    public int update(@RequestBody Product product, @PathVariable int id){
+        return productDao.updateById(product, id);
     }
 
     //route DELETE
     @DeleteMapping("/product/delete/{id}")
-    //renvoie JSON
     public int deleteById(@PathVariable int id) {
         return productDao.deleteById(id);
     }

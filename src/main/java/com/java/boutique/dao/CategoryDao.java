@@ -31,6 +31,11 @@ public class CategoryDao {
         return jdbcTemplate.update("INSERT INTO category (name) VALUES (?)",new Object[] {category.getName()});
     }
 
+    //methode update
+    public int updateById(Category category, int id){
+         return jdbcTemplate.update("UPDATE category SET name = ? WHERE id = ?", new Object[] {category.getName(), id});
+    }
+
     //methode delete
     public int deleteById(int id) {
         String sql = "DELETE FROM category WHERE id=?";

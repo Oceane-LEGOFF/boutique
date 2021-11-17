@@ -30,9 +30,14 @@ public class CategoryController {
         return categoryDao.add(category);
     }
 
+    //route update
+    @PutMapping("/category/put/{id}")
+    public int update(@RequestBody Category category, @PathVariable int id){
+        return categoryDao.updateById(category, id);
+    }
+
     //route delete
     @DeleteMapping("/category/delete/{id}")
-    // renvoie un json)
     public int deleteById(@PathVariable int id) {
         return categoryDao.deleteById(id);
     }
