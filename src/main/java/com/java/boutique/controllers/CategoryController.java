@@ -14,14 +14,21 @@ public class CategoryController {
     private CategoryDao categoryDao;
 
     @GetMapping("/category")
-    public String index(Model model){
-        model.addAttribute("listCategory", categoryDao.listAll());
-        return "index";
+    public @ResponseBody List<Category> listAll(){
+            return categoryDao.listAll();
     }
 
     @GetMapping("/category/{id}")
     public @ResponseBody List<Category> findById(@PathVariable int id) {
         return categoryDao.findById(id);
     }
+
+    // @deletemapping : indique quelle méthode (delete) on va utiliser
+    @DeleteMapping("/category/delete/{id}")
+    // reponsebody (pour renvoyer un json)
+    public int deleteById(@PathVariable int id) {
+        return categoryDao.deleteById(id);
+    }
+
 
 }

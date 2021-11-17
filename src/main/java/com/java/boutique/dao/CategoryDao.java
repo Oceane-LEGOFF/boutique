@@ -27,4 +27,8 @@ public class CategoryDao {
     }
 
 
+    public int deleteById(int id) {
+        String sql = "DELETE FROM category WHERE id=?";
+        return jdbcTemplate.update(sql, id);
+    }
 }
