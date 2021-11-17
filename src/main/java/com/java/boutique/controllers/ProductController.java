@@ -16,7 +16,6 @@ public class ProductController {
 
     @Autowired
     private ProductDao productService;
-
     private String errorMessage;
 
     @RequestMapping("/product")
