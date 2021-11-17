@@ -21,9 +21,9 @@ public class CategoryDao {
     }
 
 
-    public Category findById(int id) {
+    public List<Category> findById(int id) {
         String sql = "SELECT * FROM category WHERE id=?";
-        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Category.class), id);
+        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class), id);
     }
 
 
