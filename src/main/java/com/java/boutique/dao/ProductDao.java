@@ -21,4 +21,9 @@ public class ProductDao {
 
         return list;
     }
+
+    public int add(Product u) {
+        String sql = "INSERT INTO users (lastname, firstname, email, phone) VALUES (?, ?, ?, ?, ?);";
+        return jdbcTemplate.update(sql, u.getId(), u.getType(), u.getRating(), u.getName(), u.getCreatedAt());
+    }
 }
