@@ -14,6 +14,7 @@ public class ProductDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    //methode GET list
     public List<Product> listAll(){
         String sql = "SELECT * FROM product";
 
@@ -22,8 +23,20 @@ public class ProductDao {
         return list;
     }
 
-    public int add(Product u) {
-        String sql = "INSERT INTO users (lastname, firstname, email, phone) VALUES (?, ?, ?, ?, ?);";
-        return jdbcTemplate.update(sql, u.getId(), u.getType(), u.getRating(), u.getName(), u.getCreatedAt());
+    //methode getById
+    public List<Product> findById(int id) {
+        String sql = "SELECT * FROM product WHERE id=?";
+        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), id);
+    }
+
+    //methode add
+    public int add (Product product){
+        return jdbcTemplate.update("INSERT INTO product (type, rating, name) VALUES (?, ?, ?)",new Object[] {product.getType(), product.getRating(), product.getName()});
+    }
+
+    //methode delete
+    public int deleteById(int id) {
+        String sql = "DELETE FROM product WHERE id=?";
+        return jdbcTemplate.update(sql, id);
     }
 }
