@@ -1,7 +1,6 @@
 package com.java.boutique.controllers;
 
 import com.java.boutique.dao.ProductDao;
-import com.java.boutique.models.Category;
 import com.java.boutique.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,17 +20,12 @@ public class ProductController {
         return productDao.listAll();
     }
 
-    @GetMapping("/search{type, rating, name, createdAt}")
-    public @ResponseBody List<Product> search(@RequestParam String type, int rating, String name, String createdAt) {
-        return productDao.search(type, rating, name, createdAt);
-    }
     //route get/id
     @GetMapping("/{id}")
     public @ResponseBody List<Product> findById(@PathVariable int id) {
         return productDao.findById(id);
     }
 
-<<<<<<< HEAD
     //route get/first
     @GetMapping("/first")
     public @ResponseBody List<Product> first() {
@@ -54,14 +48,15 @@ public class ProductController {
     @GetMapping("/rangelimit")
     public @ResponseBody List<Product> rangeLimit() {
         return productDao.rangeLimit();
-=======
+    }
+
     @GetMapping("/search{type, rating, name, createdAt}")
     public @ResponseBody List<Product> search(
             @RequestParam (required = false) String type,
             @RequestParam (required = false) String name,
-            @RequestParam (required = false) String createdAt) {
+            @RequestParam (required = false) String createdAt
+    ) {
         return productDao.search(type, name, createdAt);
->>>>>>> d00ef01321e70722ea69e0e00c5ff55e28d878d6
     }
 
     //route add

@@ -27,7 +27,6 @@ public class ProductDao {
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), id);
     }
 
-<<<<<<< HEAD
     //afficher le premier
     public List<Product> first() {
         String sql = "SELECT * FROM product WHERE id=(SELECT min(id) FROM category)";
@@ -52,14 +51,9 @@ public class ProductDao {
         List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
         return list;
     }
-    public List<Product> search(String type, int rating, String name, String createdAt) {
-        String sql = "SELECT * FROM product WHERE type=? OR rating=? OR name=? OR createdAt=?";
-        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), type, rating, name, createdAt);
-=======
     public List<Product> search(String type, String name, String createdAt) {
-        String sql = "SELECT * FROM product WHERE type=? OR name=? OR createdAt=?";
+        String sql = "SELECT * FROM product WHERE type=?  OR name=? OR createdAt=?";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), type, name, createdAt);
->>>>>>> d00ef01321e70722ea69e0e00c5ff55e28d878d6
     }
 
     //methode add
@@ -78,3 +72,5 @@ public class ProductDao {
         return jdbcTemplate.update(sql, id);
     }
 }
+
+
