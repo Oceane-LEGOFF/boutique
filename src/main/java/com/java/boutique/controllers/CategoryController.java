@@ -2,6 +2,7 @@ package com.java.boutique.controllers;
 
 import com.java.boutique.dao.CategoryDao;
 import com.java.boutique.models.Category;
+import com.java.boutique.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -14,20 +15,20 @@ public class CategoryController {
     private CategoryDao categoryDao;
 
     //route get all
-    /*  @GetMapping("")
+      @GetMapping("")
     public @ResponseBody List<Category> listAll(){
             return categoryDao.listAll();
-    } */
+    }
 
     // retourne toutes les catégories  et si params dans l'url, renvoie à partir de l'index donné et la quantité donnée en size.
-    @GetMapping("")
+    /*@GetMapping("")
     public @ResponseBody List<Category> listAll(@RequestParam("start")int start,
                                                 @RequestParam("size") int size) {
         if(start >= 0 && size >= 0) {
             return categoryDao.listAllPaginated(start, size);
         }
         return categoryDao.listAll();
-    }
+    } */
 
     @GetMapping("/search{name}")
     public @ResponseBody List<Category> find(@RequestParam String name){
@@ -38,6 +39,26 @@ public class CategoryController {
     @GetMapping("/{id}")
     public @ResponseBody List<Category> findById(@PathVariable int id) {
         return categoryDao.findById(id);
+    }
+
+    @GetMapping("/triCroissantName")
+    public @ResponseBody List<Category> triCroissant() {
+        return categoryDao.triCroissantName();
+    }
+
+    @GetMapping("/triCroissantId")
+    public @ResponseBody List<Category> triCroissantId() {
+        return categoryDao.triCroissantId();
+    }
+
+    @GetMapping("/triDecroissantName")
+    public @ResponseBody List<Category> triDecroissant() {
+        return categoryDao.triDecroissantName();
+    }
+
+    @GetMapping("/triDecroissantId")
+    public @ResponseBody List<Category> triDecroissantId() {
+        return categoryDao.triDecroissantId();
     }
 
     //route get/first

@@ -29,6 +29,28 @@ public class CategoryDao {
         return list.subList(start, start + size);
     }
 
+    public List<Category> triCroissantName(){
+        String sql = "SELECT * FROM category ORDER BY name";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
+        return list;
+    }
+    public List<Category> triCroissantId(){
+        String sql = "SELECT * FROM category ORDER BY id";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
+        return list;
+    }
+
+    public List<Category> triDecroissantName(){
+        String sql = "SELECT * FROM category ORDER BY name DESC";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
+        return list;
+    }
+    public List<Category> triDecroissantId(){
+        String sql = "SELECT * FROM category ORDER BY id DESC";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
+        return list;
+    }
+
     public List<Category> find(String name){
         String sql = "SELECT * FROM category WHERE name=?";
         List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class), name);

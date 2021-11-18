@@ -33,24 +33,29 @@ public class ProductDao {
         List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
         return list;
     }
+
     //afficher le dernier
     public List<Product> last() {
         String sql = "SELECT * FROM product WHERE id=(SELECT max(id) FROM category)";
         List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
         return list;
     }
+
     //afficher 10 premiers
     public List<Product> range() {
         String sql = "SELECT * FROM product LIMIT 10";
         List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
         return list;
     }
+
     //en affiche 3 a partir de 5
     public List<Product> rangeLimit() {
         String sql = "SELECT * FROM product LIMIT 3 OFFSET 5";
         List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
         return list;
     }
+
+    //recherche par nom ou type ou date
     public List<Product> search(String type, String name, String createdAt) {
         String sql = "SELECT * FROM product WHERE type=?  OR name=? OR createdAt=?";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), type, name, createdAt);
