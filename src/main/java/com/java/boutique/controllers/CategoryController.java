@@ -19,8 +19,8 @@ public class CategoryController {
             return categoryDao.listAll();
     }
 
-    @GetMapping("/{name}")
-    public @ResponseBody List<Category> find(@PathVariable String name){
+    @GetMapping("/search{name}")
+    public @ResponseBody List<Category> find(@RequestParam String name){
         return categoryDao.find(name);
     }
 

@@ -28,6 +28,11 @@ public class ProductController {
         return productDao.findById(id);
     }
 
+    @GetMapping("/search{type, rating, name, createdAt}")
+    public @ResponseBody List<Product> search(@RequestParam String type, int rating, String name, String createdAt) {
+        return productDao.search(type, rating, name, createdAt);
+    }
+
     //route add
     @PostMapping("")
     public int add(@RequestBody Product product){

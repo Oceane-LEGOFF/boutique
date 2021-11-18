@@ -28,6 +28,11 @@ public class ProductDao {
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), id);
     }
 
+    public List<Product> search(String type, int rating, String name, String createdAt) {
+        String sql = "SELECT * FROM product WHERE type=? OR rating=? OR name=? OR createdAt=?";
+        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), type, rating, name, createdAt);
+    }
+
     //methode add
     public int add (Product product){
         return jdbcTemplate.update("INSERT INTO product (type, rating, name, createdAt, categoryId) VALUES (?, ?, ?, ?, ?)",new Object[] {product.getType(), product.getRating(), product.getName(), product.getCreatedAt(), product.getCategoryId()});
