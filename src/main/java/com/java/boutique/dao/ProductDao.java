@@ -28,6 +28,34 @@ public class ProductDao {
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), id);
     }
 
+    //afficher le premier
+    public List<Product> first() {
+        String sql = "SELECT * FROM product WHERE id=(SELECT min(id) FROM category)";
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+        return list;
+    }
+
+    //afficher le dernier
+    public List<Product> last() {
+        String sql = "SELECT * FROM product WHERE id=(SELECT max(id) FROM category)";
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+        return list;
+    }
+
+    //afficher 10 premiers
+    public List<Product> range() {
+        String sql = "SELECT * FROM product LIMIT 10";
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+        return list;
+    }
+
+    //en affiche 3 a partir de 5
+    public List<Product> rangeLimit() {
+        String sql = "SELECT * FROM product LIMIT 3 OFFSET 5";
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+        return list;
+    }
+
     public List<Product> triCroissantName(){
         String sql = "SELECT * FROM product ORDER BY name";
         List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
@@ -59,34 +87,6 @@ public class ProductDao {
 
     public List<Product> triDecroissantId(){
         String sql = "SELECT * FROM product ORDER BY id DESC";
-        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
-        return list;
-    }
-
-    //afficher le premier
-    public List<Product> first() {
-        String sql = "SELECT * FROM product WHERE id=(SELECT min(id) FROM category)";
-        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
-        return list;
-    }
-
-    //afficher le dernier
-    public List<Product> last() {
-        String sql = "SELECT * FROM product WHERE id=(SELECT max(id) FROM category)";
-        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
-        return list;
-    }
-
-    //afficher 10 premiers
-    public List<Product> range() {
-        String sql = "SELECT * FROM product LIMIT 10";
-        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
-        return list;
-    }
-
-    //en affiche 3 a partir de 5
-    public List<Product> rangeLimit() {
-        String sql = "SELECT * FROM product LIMIT 3 OFFSET 5";
         List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
         return list;
     }
