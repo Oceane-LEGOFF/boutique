@@ -33,13 +33,13 @@ public class CategoryDao {
         String sql = "SELECT * FROM category WHERE id=?";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class), id);
     }
-
-    public List<Category> findFirst() {
-        String sql = "SELECT * FROM category WHERE id = 1";
+    //afficher le premier
+    public List<Category> first() {
+        String sql = "SELECT * FROM category WHERE id=(SELECT min(id) FROM category)";
         List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
         return list;
     }
-// changer requete
+    //afficher le dernier
     public List<Category> last() {
         String sql = "SELECT * FROM category WHERE id=(SELECT max(id) FROM category)";
         List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));

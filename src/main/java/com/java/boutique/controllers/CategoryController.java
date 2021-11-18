@@ -32,8 +32,8 @@ public class CategoryController {
 
     //route get/first
     @GetMapping("/first")
-    public @ResponseBody List<Category> findFirst() {
-        return categoryDao.findFirst();
+    public @ResponseBody List<Category> first() {
+        return categoryDao.first();
     }
 
     //route get/last
