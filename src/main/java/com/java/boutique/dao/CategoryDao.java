@@ -41,7 +41,7 @@ public class CategoryDao {
     }
 // changer requete
     public List<Category> last() {
-        String sql = "SELECT * FROM category LIMIT 10";
+        String sql = "SELECT * FROM category WHERE id=(SELECT max(id) FROM category)";
         List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
         return list;
     }
