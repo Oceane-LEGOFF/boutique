@@ -1,5 +1,6 @@
 package com.java.boutique.dao;
 
+import com.java.boutique.models.Category;
 import com.java.boutique.models.Product;
 import com.java.boutique.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,41 @@ public class ProductDao {
     public List<Product> findById(int id) {
         String sql = "SELECT * FROM product WHERE id=?";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), id);
+    }
+
+    public List<Product> triCroissantName(){
+        String sql = "SELECT * FROM product ORDER BY name";
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+        return list;
+    }
+    public List<Product> triCroissantId(){
+        String sql = "SELECT * FROM product ORDER BY id";
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+        return list;
+    }
+
+    public List<Product> triCroissantType(){
+        String sql = "SELECT * FROM product ORDER BY type";
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+        return list;
+    }
+
+    public List<Product> triDecroissantName(){
+        String sql = "SELECT * FROM product ORDER BY name DESC";
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+        return list;
+    }
+
+    public List<Product> triDecroissantType(){
+        String sql = "SELECT * FROM product ORDER BY type DESC";
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+        return list;
+    }
+
+    public List<Product> triDecroissantId(){
+        String sql = "SELECT * FROM product ORDER BY id DESC";
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+        return list;
     }
 
     //afficher le premier
