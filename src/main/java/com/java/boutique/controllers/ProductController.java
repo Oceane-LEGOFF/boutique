@@ -14,10 +14,14 @@ public class ProductController {
     private ProductDao productDao;
     private String errorMessage;
 
-    //route get all
+    //get all si param=0 et pagination
     @GetMapping("")
-    public @ResponseBody List<Product> listAll(){
-        return productDao.listAll();
+    public List<Product> getRange(@RequestParam(value = "range", required = false) String range) {
+        if (range == null) {
+            return productDao.listAll();
+        } else {
+            return productDao.range(range);
+        }
     }
 
     //route get/id
@@ -38,10 +42,31 @@ public class ProductController {
         return productDao.last();
     }
 
-    //route get/range
-    @GetMapping("/range")
-    public @ResponseBody List<Product> range() {
-        return productDao.range();
+    //route add
+    @PostMapping("")
+    public int add(@RequestBody Product product){
+        return productDao.add(product);
+    }
+
+    //route update
+    @PutMapping("/{id}")
+    public int update(@RequestBody Product product, @PathVariable int id){
+        return productDao.updateById(product, id);
+    }
+
+    //route DELETE
+    @DeleteMapping("/{id}")
+    public int deleteById(@PathVariable int id) {
+        return productDao.deleteById(id);
+    }
+
+    @GetMapping("/search{type, rating, name, createdAt}")
+    public @ResponseBody List<Product> search(
+            @RequestParam (required = false) String type,
+            @RequestParam (required = false) String name,
+            @RequestParam (required = false) String createdAt
+    ) {
+        return productDao.search(type, name, createdAt);
     }
 
     @GetMapping("/triCroissantName")
@@ -72,39 +97,6 @@ public class ProductController {
     @GetMapping("/triDecroissantType")
     public @ResponseBody List<Product> triDecroissantType() {
         return productDao.triDecroissantType();
-    }
-
-    //route get/rangeLimité
-    @GetMapping("/rangelimit")
-    public @ResponseBody List<Product> rangeLimit() {
-        return productDao.rangeLimit();
-    }
-
-    @GetMapping("/search{type, rating, name, createdAt}")
-    public @ResponseBody List<Product> search(
-            @RequestParam (required = false) String type,
-            @RequestParam (required = false) String name,
-            @RequestParam (required = false) String createdAt
-    ) {
-        return productDao.search(type, name, createdAt);
-    }
-
-    //route add
-    @PostMapping("")
-    public int add(@RequestBody Product product){
-        return productDao.add(product);
-    }
-
-    //route update
-    @PutMapping("/{id}")
-    public int update(@RequestBody Product product, @PathVariable int id){
-        return productDao.updateById(product, id);
-    }
-
-    //route DELETE
-    @DeleteMapping("/{id}")
-    public int deleteById(@PathVariable int id) {
-        return productDao.deleteById(id);
     }
 
 }

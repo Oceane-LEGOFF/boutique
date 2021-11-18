@@ -1,6 +1,7 @@
 package com.java.boutique.dao;
 
 import com.java.boutique.models.Category;
+import com.java.boutique.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
@@ -22,45 +23,28 @@ public class CategoryDao {
         return list;
     }
 
+    /*
     public List<Category> listAllPaginated(int start, int size){
         String sql = "SELECT * FROM category";
         List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
         if(start + size > list.size()) return new ArrayList<Category>();
         return list.subList(start, start + size);
     }
-
-    public List<Category> triCroissantName(){
-        String sql = "SELECT * FROM category ORDER BY name";
-        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
-        return list;
-    }
-    public List<Category> triCroissantId(){
-        String sql = "SELECT * FROM category ORDER BY id";
-        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
-        return list;
-    }
-
-    public List<Category> triDecroissantName(){
-        String sql = "SELECT * FROM category ORDER BY name DESC";
-        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
-        return list;
-    }
-    public List<Category> triDecroissantId(){
-        String sql = "SELECT * FROM category ORDER BY id DESC";
-        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
-        return list;
-    }
-
-    public List<Category> find(String name){
-        String sql = "SELECT * FROM category WHERE name=?";
-        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class), name);
-        return list;
-    }
+    */
 
     //methode GetById
     public List<Category> findById(int id) {
         String sql = "SELECT * FROM category WHERE id=?";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class), id);
+    }
+
+    public List<Category> range(String range) {
+        String[] value = range.split("-");
+        String sql = "SELECT * FROM category LIMIT ? OFFSET ?";
+        int limit = Integer.parseInt(value[1]);
+        int offset = Integer.parseInt(value[0]);
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class), limit, offset);
+        return list;
     }
 
     //afficher le premier
@@ -73,20 +57,6 @@ public class CategoryDao {
     //afficher le dernier
     public List<Category> last() {
         String sql = "SELECT * FROM category WHERE id=(SELECT max(id) FROM category)";
-        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
-        return list;
-    }
-
-    //afficher 10 premiers
-    public List<Category> range() {
-        String sql = "SELECT * FROM category LIMIT 10";
-        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
-        return list;
-    }
-
-    //en affiche 3 a partir de 5
-    public List<Category> rangeLimit() {
-        String sql = "SELECT * FROM category LIMIT 3 OFFSET 5";
         List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
         return list;
     }
@@ -106,4 +76,34 @@ public class CategoryDao {
         String sql = "DELETE FROM category WHERE id=?";
         return jdbcTemplate.update(sql, id);
     }
+
+    public List<Category> find(String name){
+        String sql = "SELECT * FROM category WHERE name=?";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class), name);
+        return list;
+    }
+
+    public List<Category> triCroissantName(){
+        String sql = "SELECT * FROM category ORDER BY name";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
+        return list;
+    }
+
+    public List<Category> triCroissantId(){
+        String sql = "SELECT * FROM category ORDER BY id";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
+        return list;
+    }
+
+    public List<Category> triDecroissantName(){
+        String sql = "SELECT * FROM category ORDER BY name DESC";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
+        return list;
+    }
+    public List<Category> triDecroissantId(){
+        String sql = "SELECT * FROM category ORDER BY id DESC";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
+        return list;
+    }
+
 }

@@ -1,7 +1,5 @@
 package com.java.boutique.dao;
 
-import com.java.boutique.models.Category;
-import com.java.boutique.models.Product;
 import com.java.boutique.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -28,6 +26,15 @@ public class ProductDao {
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), id);
     }
 
+    public List<Product> range(String range) {
+        String[] value = range.split("-");
+        String sql = "SELECT * FROM product LIMIT ? OFFSET ?";
+        int limit = Integer.parseInt(value[1]);
+        int offset = Integer.parseInt(value[0]);
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), limit, offset);
+        return list;
+    }
+
     //afficher le premier
     public List<Product> first() {
         String sql = "SELECT * FROM product WHERE id=(SELECT min(id) FROM category)";
@@ -42,18 +49,26 @@ public class ProductDao {
         return list;
     }
 
-    //afficher 10 premiers
-    public List<Product> range() {
-        String sql = "SELECT * FROM product LIMIT 10";
-        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
-        return list;
+    //methode add
+    public int add (Product product){
+        return jdbcTemplate.update("INSERT INTO product (type, rating, name, createdAt, categoryId) VALUES (?, ?, ?, ?, ?)",new Object[] {product.getType(), product.getRating(), product.getName(), product.getCreatedAt(), product.getCategoryId()});
     }
 
-    //en affiche 3 a partir de 5
-    public List<Product> rangeLimit() {
-        String sql = "SELECT * FROM product LIMIT 3 OFFSET 5";
-        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
-        return list;
+    //methode update
+    public int updateById(Product product, int id){
+        return jdbcTemplate.update("UPDATE product SET type = ?, rating = ?, name = ? WHERE id = ?", new Object[] {product.getType(), product.getRating(), product.getName(), id});
+    }
+
+    //methode delete
+    public int deleteById(int id) {
+        String sql = "DELETE FROM product WHERE id=?";
+        return jdbcTemplate.update(sql, id);
+    }
+
+    //recherche par nom ou type ou date
+    public List<Product> search(String type, String name, String createdAt) {
+        String sql = "SELECT * FROM product WHERE type=?  OR name=? OR createdAt=?";
+        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), type, name, createdAt);
     }
 
     public List<Product> triCroissantName(){
@@ -91,27 +106,4 @@ public class ProductDao {
         return list;
     }
 
-    //recherche par nom ou type ou date
-    public List<Product> search(String type, String name, String createdAt) {
-        String sql = "SELECT * FROM product WHERE type=?  OR name=? OR createdAt=?";
-        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), type, name, createdAt);
-    }
-
-    //methode add
-    public int add (Product product){
-        return jdbcTemplate.update("INSERT INTO product (type, rating, name, createdAt, categoryId) VALUES (?, ?, ?, ?, ?)",new Object[] {product.getType(), product.getRating(), product.getName(), product.getCreatedAt(), product.getCategoryId()});
-    }
-
-    //methode update
-    public int updateById(Product product, int id){
-        return jdbcTemplate.update("UPDATE product SET type = ?, rating = ?, name = ? WHERE id = ?", new Object[] {product.getType(), product.getRating(), product.getName(), id});
-    }
-
-    //methode delete
-    public int deleteById(int id) {
-        String sql = "DELETE FROM product WHERE id=?";
-        return jdbcTemplate.update(sql, id);
-    }
 }
-
-
