@@ -6,12 +6,14 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 @Repository
 public class CategoryDao {
     @Autowired
     private JdbcTemplate  jdbcTemplate;
+    List<Category> ArrayList;
 
     //methode Get list
     public List<Category> listAll(){
@@ -24,6 +26,30 @@ public class CategoryDao {
     public List<Category> findById(int id) {
         String sql = "SELECT * FROM category WHERE id=?";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class), id);
+    }
+
+    public List<Category> findFirst() {
+        String sql = "SELECT * FROM category WHERE id = 1";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
+        return list;
+    }
+// changer requete
+    public List<Category> last() {
+        String sql = "SELECT * FROM category LIMIT 10";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
+        return list;
+    }
+    //afficher 10 premiers
+    public List<Category> range() {
+        String sql = "SELECT * FROM category LIMIT 10";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
+        return list;
+    }
+    //en affiche 3 a partir de 5
+    public List<Category> rangeLimit() {
+        String sql = "SELECT * FROM category LIMIT 3 OFFSET 5";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
+        return list;
     }
 
     //methode add
