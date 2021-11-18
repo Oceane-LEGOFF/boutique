@@ -29,8 +29,11 @@ public class ProductController {
     }
 
     @GetMapping("/search{type, rating, name, createdAt}")
-    public @ResponseBody List<Product> search(@RequestParam String type, int rating, String name, String createdAt) {
-        return productDao.search(type, rating, name, createdAt);
+    public @ResponseBody List<Product> search(
+            @RequestParam (required = false) String type,
+            @RequestParam (required = false) String name,
+            @RequestParam (required = false) String createdAt) {
+        return productDao.search(type, name, createdAt);
     }
 
     //route add

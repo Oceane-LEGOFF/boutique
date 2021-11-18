@@ -28,9 +28,9 @@ public class ProductDao {
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), id);
     }
 
-    public List<Product> search(String type, int rating, String name, String createdAt) {
-        String sql = "SELECT * FROM product WHERE type=? OR rating=? OR name=? OR createdAt=?";
-        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), type, rating, name, createdAt);
+    public List<Product> search(String type, String name, String createdAt) {
+        String sql = "SELECT * FROM product WHERE type=? OR name=? OR createdAt=?";
+        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), type, name, createdAt);
     }
 
     //methode add
