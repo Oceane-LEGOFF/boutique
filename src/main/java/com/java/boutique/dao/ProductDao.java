@@ -1,6 +1,7 @@
 package com.java.boutique.dao;
 
 import com.java.boutique.models.Product;
+import com.java.boutique.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,9 +17,7 @@ public class ProductDao {
     //methode GET list
     public List<Product> listAll(){
         String sql = "SELECT * FROM product";
-
         List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
-
         return list;
     }
 
@@ -28,6 +27,30 @@ public class ProductDao {
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), id);
     }
 
+    //afficher le premier
+    public List<Product> first() {
+        String sql = "SELECT * FROM product WHERE id=(SELECT min(id) FROM category)";
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+        return list;
+    }
+    //afficher le dernier
+    public List<Product> last() {
+        String sql = "SELECT * FROM product WHERE id=(SELECT max(id) FROM category)";
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+        return list;
+    }
+    //afficher 10 premiers
+    public List<Product> range() {
+        String sql = "SELECT * FROM product LIMIT 10";
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+        return list;
+    }
+    //en affiche 3 a partir de 5
+    public List<Product> rangeLimit() {
+        String sql = "SELECT * FROM product LIMIT 3 OFFSET 5";
+        List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+        return list;
+    }
     public List<Product> search(String type, int rating, String name, String createdAt) {
         String sql = "SELECT * FROM product WHERE type=? OR rating=? OR name=? OR createdAt=?";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class), type, rating, name, createdAt);

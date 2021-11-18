@@ -13,9 +13,8 @@ import java.util.List;
 public class CategoryDao {
     @Autowired
     private JdbcTemplate  jdbcTemplate;
-    List<Category> ArrayList;
 
-    //methode Get list
+    //methode GET list
     public List<Category> listAll(){
         String sql = "SELECT * FROM category";
         List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
@@ -33,24 +32,28 @@ public class CategoryDao {
         String sql = "SELECT * FROM category WHERE id=?";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class), id);
     }
+
     //afficher le premier
     public List<Category> first() {
         String sql = "SELECT * FROM category WHERE id=(SELECT min(id) FROM category)";
         List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
         return list;
     }
+
     //afficher le dernier
     public List<Category> last() {
         String sql = "SELECT * FROM category WHERE id=(SELECT max(id) FROM category)";
         List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
         return list;
     }
+
     //afficher 10 premiers
     public List<Category> range() {
         String sql = "SELECT * FROM category LIMIT 10";
         List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
         return list;
     }
+
     //en affiche 3 a partir de 5
     public List<Category> rangeLimit() {
         String sql = "SELECT * FROM category LIMIT 3 OFFSET 5";
