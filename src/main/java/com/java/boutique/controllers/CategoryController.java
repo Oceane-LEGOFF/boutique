@@ -14,8 +14,12 @@ public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
 
-    //route get all
-      @GetMapping("")
+    /**
+     * Get all category list.
+     *
+     * @return the list
+     */
+    @GetMapping("")
     public @ResponseBody List<Category> listAll(){
             return categoryDao.listAll();
     }
@@ -35,69 +39,133 @@ public class CategoryController {
         return categoryDao.find(name);
     }
 
-    //route get/id
+    /**
+     * Get one product list.
+     *
+     * @params id
+     * @return product product
+     */
     @GetMapping("/{id}")
     public @ResponseBody List<Category> findById(@PathVariable int id) {
         return categoryDao.findById(id);
     }
 
+    /**
+     * Get all category list.
+     *
+     * @params none
+     * @return category sort by name
+     */
     @GetMapping("/triCroissantName")
     public @ResponseBody List<Category> triCroissant() {
         return categoryDao.triCroissantName();
     }
 
+    /**
+     * Get all category list.
+     *
+     * @params none
+     * @return category sort by id
+     */
     @GetMapping("/triCroissantId")
     public @ResponseBody List<Category> triCroissantId() {
         return categoryDao.triCroissantId();
     }
 
+    /**
+     * Get all category list.
+     *
+     * @params none
+     * @return category sort by name
+     */
     @GetMapping("/triDecroissantName")
     public @ResponseBody List<Category> triDecroissant() {
         return categoryDao.triDecroissantName();
     }
 
+    /**
+     * Get all category list.
+     *
+     * @params none
+     * @return category sort by id
+     */
     @GetMapping("/triDecroissantId")
     public @ResponseBody List<Category> triDecroissantId() {
         return categoryDao.triDecroissantId();
     }
 
-    //route get/first
+    /**
+     * Get the first category of the list.
+     *
+     * @params none
+     * @return first category
+     */
     @GetMapping("/first")
     public @ResponseBody List<Category> first() {
         return categoryDao.first();
     }
 
-    //route get/last
+    /**
+     * Get the last category of the list.
+     *
+     * @params none
+     * @return last category
+     */
     @GetMapping("/last")
     public @ResponseBody List<Category> last() {
         return categoryDao.last();
     }
 
-    //route get/range
+    /**
+     * Get the 10 first category of the list.
+     *
+     * @params none
+     * @return 10 category product
+     */
     @GetMapping("/range")
     public @ResponseBody List<Category> range() {
         return categoryDao.range();
     }
 
-    //route get/rangeLimité
+    /**
+     * Get the 3  category of the list from the 5th place.
+    *
+    * @params none
+     * @return 3 category
+     */
     @GetMapping("/rangelimit")
     public @ResponseBody List<Category> rangeLimit() {
         return categoryDao.rangeLimit();
     }
 
-    //route add
+    /**
+     * Add category of the list.
+     *
+     * @params none
+     * @return int 1
+     */
     @PostMapping("")
     public int add(@RequestBody Category category){
         return categoryDao.add(category);
     }
 
-    //route update
+    /**
+     * update category of the list.
+     *
+     * @params id
+     * @return updated category
+     */
     @PutMapping("/{id}")
     public int update(@RequestBody Category category, @PathVariable int id){
         return categoryDao.updateById(category, id);
     }
 
-    //route delete
+    /**
+     * delete category of the list.
+     *
+     * @params id
+     * @return
+     */
     @DeleteMapping("/{id}")
     public int deleteById(@PathVariable int id) {
         return categoryDao.deleteById(id);

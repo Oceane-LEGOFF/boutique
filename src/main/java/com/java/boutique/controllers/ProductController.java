@@ -26,36 +26,6 @@ public class ProductController {
         return productDao.findById(id);
     }
 
-    @GetMapping("/triCroissantName")
-    public @ResponseBody List<Product> triCroissant() {
-        return productDao.triCroissantName();
-    }
-
-    @GetMapping("/triCroissantId")
-    public @ResponseBody List<Product> triCroissantId() {
-        return productDao.triCroissantId();
-    }
-
-    @GetMapping("/triCroissantType")
-    public @ResponseBody List<Product> triCroissantType() {
-        return productDao.triCroissantType();
-    }
-
-    @GetMapping("/triDecroissantName")
-    public @ResponseBody List<Product> triDecroissant() {
-        return productDao.triDecroissantName();
-    }
-
-    @GetMapping("/triDecroissantId")
-    public @ResponseBody List<Product> triDecroissantId() {
-        return productDao.triDecroissantId();
-    }
-
-    @GetMapping("/triDecroissantType")
-    public @ResponseBody List<Product> triDecroissantType() {
-        return productDao.triDecroissantType();
-    }
-
     //route get/first
     @GetMapping("/first")
     public @ResponseBody List<Product> first() {
