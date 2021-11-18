@@ -20,6 +20,12 @@ public class CategoryDao {
         return list;
     }
 
+    public List<Category> find(String name){
+        String sql = "SELECT * FROM category WHERE name=?";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class), name);
+        return list;
+    }
+
     //methode GetById
     public List<Category> findById(int id) {
         String sql = "SELECT * FROM category WHERE id=?";

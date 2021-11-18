@@ -19,6 +19,11 @@ public class CategoryController {
             return categoryDao.listAll();
     }
 
+    @GetMapping("/{name}")
+    public @ResponseBody List<Category> find(@PathVariable String name){
+        return categoryDao.find(name);
+    }
+
     //route get/id
     @GetMapping("/{id}")
     public @ResponseBody List<Category> findById(@PathVariable int id) {
