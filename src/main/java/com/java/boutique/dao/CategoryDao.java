@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -19,6 +20,13 @@ public class CategoryDao {
         String sql = "SELECT * FROM category";
         List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
         return list;
+    }
+
+    public List<Category> listAllPaginated(int start, int size){
+        String sql = "SELECT * FROM category";
+        List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
+        if(start + size > list.size()) return new ArrayList<Category>();
+        return list.subList(start, start + size);
     }
 
     public List<Category> find(String name){

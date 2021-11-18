@@ -14,9 +14,19 @@ public class CategoryController {
     private CategoryDao categoryDao;
 
     //route get all
-    @GetMapping("")
+    /*  @GetMapping("")
     public @ResponseBody List<Category> listAll(){
             return categoryDao.listAll();
+    } */
+
+    // retourne toutes les catégories  et si params dans l'url, renvoie à partir de l'index donné et la quantité donnée en size.
+    @GetMapping("")
+    public @ResponseBody List<Category> listAll(@RequestParam("start")int start,
+                                                @RequestParam("size") int size) {
+        if(start >= 0 && size >= 0) {
+            return categoryDao.listAllPaginated(start, size);
+        }
+        return categoryDao.listAll();
     }
 
     @GetMapping("/search{name}")

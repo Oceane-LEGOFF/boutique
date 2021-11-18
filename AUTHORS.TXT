@@ -1,0 +1,21 @@
+GROUPE 2
+
+Gauthier CORNEC
+
+Océane LE GOFF
+
+Claire MATHIRON (scrum-master)
+
+Création de la base de données et CRUD, réalisés en MOB programming.
+
+Pagination : Océane et Claire
+
+Tris : Gauthier et Océane
+
+Filtres : Gauthier
+
+Recherche : Gauthier
+
+Tests unitaires :
+
+Doc de l'API avec Swagger : Gauthier
