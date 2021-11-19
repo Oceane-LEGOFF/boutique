@@ -1,14 +1,12 @@
 GROUPE 2
 
 Gauthier CORNEC
-
 Océane LE GOFF
-
 Claire MATHIRON (scrum-master)
 
 Création de la base de données et CRUD, réalisés en MOB programming.
 
-Pagination : Océane
+Pagination : Océane (fonction gardée en définitive) et Claire (fonction commentée de la ligne 22 à 29 du categoryDAO.)
 
 Tris : Océane
 
