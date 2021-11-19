@@ -81,7 +81,6 @@ public class ProductDao {
         List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
         return list;
     }
-
     public List<Product> triCroissantType(){
         String sql = "SELECT * FROM product ORDER BY type";
         List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
@@ -93,13 +92,11 @@ public class ProductDao {
         List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
         return list;
     }
-
     public List<Product> triDecroissantType(){
         String sql = "SELECT * FROM product ORDER BY type DESC";
         List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
         return list;
     }
-
     public List<Product> triDecroissantId(){
         String sql = "SELECT * FROM product ORDER BY id DESC";
         List<Product> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));

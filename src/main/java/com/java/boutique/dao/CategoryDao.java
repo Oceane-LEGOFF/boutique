@@ -1,14 +1,10 @@
 package com.java.boutique.dao;
 
 import com.java.boutique.models.Category;
-import com.java.boutique.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -88,7 +84,6 @@ public class CategoryDao {
         List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));
         return list;
     }
-
     public List<Category> triCroissantId(){
         String sql = "SELECT * FROM category ORDER BY id";
         List<Category> list = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Category.class));

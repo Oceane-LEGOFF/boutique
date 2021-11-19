@@ -2,7 +2,6 @@ package com.java.boutique.controllers;
 
 import com.java.boutique.dao.CategoryDao;
 import com.java.boutique.models.Category;
-import com.java.boutique.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -112,58 +111,39 @@ public class CategoryController {
     }
 
     /**
-     * Get one product list.
+     * Get one category list.
      *
      * @params id
-     * @return product product
+     * @return category category
      */
     @GetMapping("/{id}")
     public @ResponseBody List<Category> findById(@PathVariable int id) {
         return categoryDao.findById(id);
     }
 
-    /**
-     * Get all category list.
-     *
-     * @params none
-     * @return category sort by name
-     */
-    @GetMapping("/triCroissantName")
-    public @ResponseBody List<Category> triCroissant() {
-        return categoryDao.triCroissantName();
+
+    @GetMapping("/triCroissant")
+    public List<Category> triCroissant(@RequestParam(value = "id", required = false) String id,
+                                        @RequestParam(value = "name", required = false) String name) {
+        if (name == null && id != null){
+            return categoryDao.triCroissantId();
+        } else if (id == null && name != null){
+            return categoryDao.triCroissantName();
+        } else {
+            return categoryDao.listAll();
+        }
     }
 
-    /**
-     * Get all category list.
-     *
-     * @params none
-     * @return category sort by id
-     */
-    @GetMapping("/triCroissantId")
-    public @ResponseBody List<Category> triCroissantId() {
-        return categoryDao.triCroissantId();
-    }
-
-    /**
-     * Get all category list.
-     *
-     * @params none
-     * @return category sort by name
-     */
-    @GetMapping("/triDecroissantName")
-    public @ResponseBody List<Category> triDecroissant() {
-        return categoryDao.triDecroissantName();
-    }
-
-    /**
-     * Get all category list.
-     *
-     * @params none
-     * @return category sort by id
-     */
-    @GetMapping("/triDecroissantId")
-    public @ResponseBody List<Category> triDecroissantId() {
-        return categoryDao.triDecroissantId();
+    @GetMapping("/triDecroissant")
+    public List<Category> triDecroissant(@RequestParam(value = "id", required = false) String id,
+                                        @RequestParam(value = "name", required = false) String name) {
+        if (name == null && id != null){
+            return categoryDao.triDecroissantId();
+        } else if (id == null && name != null){
+            return categoryDao.triDecroissantName();
+        } else {
+            return categoryDao.listAll();
+        }
     }
 
 }

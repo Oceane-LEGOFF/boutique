@@ -69,34 +69,33 @@ public class ProductController {
         return productDao.search(type, name, createdAt);
     }
 
-    @GetMapping("/triCroissantName")
-    public @ResponseBody List<Product> triCroissant() {
-        return productDao.triCroissantName();
+    @GetMapping("/triCroissant")
+    public List<Product> triCroissant(@RequestParam(value = "id", required = false) String id,
+                                      @RequestParam(value = "type", required = false) String type,
+                                      @RequestParam(value = "name", required = false) String name) {
+        if (name == null && type == null && id != null){
+            return productDao.triCroissantId();
+        } else if (name == null && id == null && type != null){
+            return productDao.triCroissantType();
+        } else if (id == null && type == null && name != null){
+            return productDao.triCroissantName();
+        } else {
+            return productDao.listAll();
+        }
     }
-
-    @GetMapping("/triCroissantId")
-    public @ResponseBody List<Product> triCroissantId() {
-        return productDao.triCroissantId();
-    }
-
-    @GetMapping("/triCroissantType")
-    public @ResponseBody List<Product> triCroissantType() {
-        return productDao.triCroissantType();
-    }
-
-    @GetMapping("/triDecroissantName")
-    public @ResponseBody List<Product> triDecroissant() {
-        return productDao.triDecroissantName();
-    }
-
-    @GetMapping("/triDecroissantId")
-    public @ResponseBody List<Product> triDecroissantId() {
-        return productDao.triDecroissantId();
-    }
-
-    @GetMapping("/triDecroissantType")
-    public @ResponseBody List<Product> triDecroissantType() {
-        return productDao.triDecroissantType();
+    @GetMapping("/triDecroissant")
+    public List<Product> triDecroissant(@RequestParam(value = "id", required = false) String id,
+                                      @RequestParam(value = "type", required = false) String type,
+                                      @RequestParam(value = "name", required = false) String name) {
+        if (name == null && type == null && id != null){
+            return productDao.triDecroissantId();
+        } else if (name == null && id == null && type != null){
+            return productDao.triDecroissantType();
+        } else if (id == null && type == null && name != null){
+            return productDao.triDecroissantName();
+        } else {
+            return productDao.listAll();
+        }
     }
 
 }

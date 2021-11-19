@@ -8,14 +8,14 @@ Claire MATHIRON (scrum-master)
 
 Création de la base de données et CRUD, réalisés en MOB programming.
 
-Pagination : Océane et Claire
+Pagination : Océane
 
-Tris : Gauthier et Océane
+Tris : Océane
 
 Filtres : Gauthier
 
 Recherche : Gauthier
 
-Tests unitaires :
+Tests unitaires : Gauthier
 
-Doc de l'API avec Swagger : Gauthier
+Doc de l'API avec Swagger : Claire
